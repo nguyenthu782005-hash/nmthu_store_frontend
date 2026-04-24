@@ -6,7 +6,7 @@ const Footer = () => (
     <div className="container">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '24px' }}>CLOTH<span className="grad-text">STORE</span></h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '24px' }}>THU<span className="grad-text">STORE</span></h2>
           <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>Trải nghiệm mua sắm thời trang trực tuyến hiện đại và chuyên nghiệp nhất.</p>
           <div style={{ display: 'flex', gap: '16px' }}>
             {[Facebook, Instagram, Twitter].map((Icon, idx) => (
@@ -44,7 +44,7 @@ const Footer = () => (
         </div>
       </div>
       <div style={{ marginTop: '60px', paddingTop: '40px', borderTop: '1px solid #f1f5f9', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-        &copy; 2024 CLOTH STORE - Bản quyền thuộc về Nguyen Minh Thu
+        &copy; 2024 THU STORE - Bản quyền thuộc về Nguyen Minh Thu
       </div>
     </div>
   </footer>

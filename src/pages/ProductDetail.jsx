@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Star } from 'lucide-react'
 
 const ProductDetail = ({ product, onClose, onAddToCart }) => {
+  const [activeImage, setActiveImage] = useState(product?.image)
+
   if (!product) return null
+
+  const gallery = [
+    product.image,
+    product.image1,
+    product.image2,
+    product.image3
+  ].filter(img => img); // Lọc bỏ những ảnh trống
 
   return (
     <div className="animate-fade" style={{ background: 'white', minHeight: '100vh', padding: '60px 0' }}>
@@ -10,13 +19,37 @@ const ProductDetail = ({ product, onClose, onAddToCart }) => {
         <button className="btn-ghost" onClick={onClose} style={{ marginBottom: '32px' }}>
            &larr; Quay lại danh sách
         </button>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
-          <div style={{ borderRadius: '32px', overflow: 'hidden', background: '#f8fafc' }}>
-            <img 
-              src={product.image || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600'} 
-              alt={product.name} 
-              style={{ width: '100%', height: 'auto' }}
-            />
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '60px' }}>
+          <div>
+            {/* Main Preview */}
+            <div style={{ borderRadius: '32px', overflow: 'hidden', background: '#f8fafc', marginBottom: '20px', aspectRatio: '1/1' }}>
+              <img 
+                src={activeImage || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600'} 
+                alt={product.name} 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+            
+            {/* Gallery Thumbnails */}
+            <div style={{ display: 'flex', gap: '16px' }}>
+              {gallery.map((img, idx) => (
+                <div 
+                  key={idx}
+                  onClick={() => setActiveImage(img)}
+                  style={{ 
+                    width: '100px', 
+                    height: '100px', 
+                    borderRadius: '16px', 
+                    overflow: 'hidden', 
+                    cursor: 'pointer',
+                    border: activeImage === img ? '3px solid var(--primary)' : '2px solid #f1f5f9',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <img src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              ))}
+            </div>
           </div>
           <div>
             <span className="badge" style={{ marginBottom: '16px', display: 'inline-block' }}>{product.category?.name || 'Mới nhất'}</span>

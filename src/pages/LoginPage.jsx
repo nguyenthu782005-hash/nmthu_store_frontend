@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ArrowLeft, Mail, Lock, Loader2 } from 'lucide-react'
 import { AuthService } from '../api'
 
-const LoginPage = ({ onLoginSuccess, onBack, onGoToRegister }) => {
+const LoginPage = ({ onLoginSuccess, onBack, onGoToRegister, onGoToForgotPassword }) => {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -73,7 +73,7 @@ const LoginPage = ({ onLoginSuccess, onBack, onGoToRegister }) => {
             </div>
           </div>
 
-          <div style={{ marginBottom: '32px' }}>
+          <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '0.9rem' }}>Mật khẩu</label>
             <div style={{ position: 'relative' }}>
               <Lock size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
@@ -87,6 +87,10 @@ const LoginPage = ({ onLoginSuccess, onBack, onGoToRegister }) => {
                 style={{ width: '100%', padding: '12px 16px 12px 48px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
               />
             </div>
+          </div>
+
+          <div style={{ textAlign: 'right', marginBottom: '24px' }}>
+            <span onClick={onGoToForgotPassword} style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: '600', cursor: 'pointer' }}>Quên mật khẩu?</span>
           </div>
 
           <button 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { ProductService } from '../api'
+import { ProductService, ContentService } from '../api'
 import Hero from '../components/Home/Hero'
 import ProductCard from '../components/Product/ProductCard'
 import CategoryCard from '../components/Category/CategoryCard'
 
 const HomePage = ({ onProductSelect, onAddToCart, categories, onNavigate }) => {
   const [products, setProducts] = useState([])
+  const [banners, setBanners] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -14,8 +15,12 @@ const HomePage = ({ onProductSelect, onAddToCart, categories, onNavigate }) => {
 
   const fetchData = async () => {
     try {
-      const prods = await ProductService.getAll()
+      const [prods, bans] = await Promise.all([
+        ProductService.getAll(),
+        ContentService.getBanners()
+      ])
       setProducts(prods.data)
+      setBanners(bans.data.filter(b => b.isActive))
       setLoading(false)
     } catch (err) {
       console.error(err)
@@ -25,12 +30,15 @@ const HomePage = ({ onProductSelect, onAddToCart, categories, onNavigate }) => {
 
   return (
     <div className="animate-fade">
-      <Hero onExplore={() => {
-        const element = document.getElementById('featured');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }} />
+      <Hero 
+        banners={banners}
+        onExplore={() => {
+          const element = document.getElementById('featured');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }} 
+      />
       
       <section style={{ padding: '60px 0' }}>
         <div className="container">

@@ -10,7 +10,7 @@ const Navbar = ({ cartCount, onNavigate, onToggleCart, categories, currentUser, 
             onClick={() => onNavigate('home')} 
             style={{ fontSize: '1.5rem', fontWeight: '800', cursor: 'pointer', letterSpacing: '-0.5px' }}
           >
-            CLOTH<span className="grad-text">STORE</span>
+            THU<span className="grad-text">STORE</span>
           </h1>
           <div style={{ display: 'flex', gap: '24px' }}>
             <button 
